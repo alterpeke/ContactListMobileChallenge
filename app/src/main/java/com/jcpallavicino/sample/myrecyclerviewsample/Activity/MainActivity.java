@@ -12,10 +12,12 @@ import com.google.gson.GsonBuilder;
 import com.jcpallavicino.sample.myrecyclerviewsample.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Contact;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.Utils.RestClient;
+import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Result;
 
 
 import retrofit2.Call;
@@ -28,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> image_titles = new ArrayList<>();
     ArrayList<String> image_url = new ArrayList<>();
-
+    ArrayList<Result> resultForAdapter = new ArrayList<>();
+    MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +67,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         RestClient restClient = retrofit.create(RestClient.class);
-        Call<Contact> call = restClient.getData();
+        Call<List<Contact>> call = restClient.getData();
 
-        call.enqueue(new Callback<Contact>() {
+        call.enqueue(new Callback<List<Contact>>() {
             @Override
-            public void onResponse(Call<Contact> call, Response<Contact> response) {
+            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 switch (response.code()) {
                     case 200:
-                        Contact data = response.body();
-                        //view.notifyDataSetChanged(data.getResults());
+                        Log.i("REST SUCCESS", "Responce Code 200");
+                        List<Contact> data = response.body();
+                        view.notifyDataSetChanged();
+
                         break;
                     case 401:
 
@@ -84,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Contact> call, Throwable t) {
-                Log.e("error", t.toString());
+            public void onFailure(Call<List<Contact>> call, Throwable t) {
+                Log.e("REST ERROR", t.toString());
             }
         });
     }

@@ -3,6 +3,7 @@ package com.jcpallavicino.sample.myrecyclerviewsample.Utils;
 /**
  * Created by juan.pallavicino on 25/2/2018.
  */
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contact {
@@ -15,6 +16,7 @@ public class Contact {
     private List<Phone> phones = null;
     private String thumb;
     private String photo;
+    private List<Result> results = new ArrayList<Result>();
 
     public String getUserId() {
         return userId;
@@ -80,5 +82,12 @@ public class Contact {
         this.photo = photo;
     }
 
+    public List<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
 }
 

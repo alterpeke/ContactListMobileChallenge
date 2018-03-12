@@ -10,21 +10,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.R;
+import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Result;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by juan.pallavicino on 26/9/2017.
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private List<Result> list;
     private ArrayList<CreateList> galleryList;
     private Context context;
 
-    public MyAdapter(Context context, ArrayList<CreateList> galleryList) {
-        this.galleryList = galleryList;
-        this.context = context;
+    public MyAdapter(Context context, ArrayList<Result> galleryList) {
+//        this.galleryList = galleryList;
+//        this.context = context;
+    }
+
+    public void swap(List<Result> newList) {
+        list.clear();
+        list.addAll(newList);
+        notifyDataSetChanged();
+
     }
 
     @Override

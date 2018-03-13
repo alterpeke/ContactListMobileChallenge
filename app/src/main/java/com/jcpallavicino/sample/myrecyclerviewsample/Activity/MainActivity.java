@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> image_titles = new ArrayList<>();
     ArrayList<String> image_url = new ArrayList<>();
-    ArrayList<Result> resultForAdapter = new ArrayList<>();
-    MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
+    ArrayList<Contact> resultForAdapter = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayList<CreateList> createLists = prepareData();
 //        MyAdapter adapter = new MyAdapter(getApplicationContext(), createLists);
 //        recyclerView.setAdapter(adapter);
+        //MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
+        //recyclerView.setAdapter(view);
     }
 
     private void loadJSON(){
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     case 200:
                         Log.i("REST SUCCESS", "Responce Code 200");
                         List<Contact> data = response.body();
-                        view.notifyDataSetChanged();
+                        //rrayList<Contact> data = (ArrayList<Contact>) response.body();
+                        //view.notifyDataSetChanged();
+                        //resultForAdapter = data;
 
                         break;
                     case 401:

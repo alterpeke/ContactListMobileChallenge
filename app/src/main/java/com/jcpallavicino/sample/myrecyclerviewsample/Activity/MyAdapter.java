@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.R;
+import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Contact;
 import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Result;
 import com.squareup.picasso.Picasso;
 
@@ -21,16 +22,16 @@ import java.util.List;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Result> list;
+    private List<Contact> list;
     private ArrayList<CreateList> galleryList;
     private Context context;
 
-    public MyAdapter(Context context, ArrayList<Result> galleryList) {
+    public MyAdapter(Context context, ArrayList<Contact> galleryList) {
 //        this.galleryList = galleryList;
 //        this.context = context;
     }
 
-    public void swap(List<Result> newList) {
+    public void swap(List<Contact> newList) {
         list.clear();
         list.addAll(newList);
         notifyDataSetChanged();

@@ -7,7 +7,7 @@ package com.jcpallavicino.sample.myrecyclerviewsample.Utils;
 public class Phone {
 
     private String type;
-    private Object number;
+    private String number;
 
     public String getType() {
         return type;
@@ -17,11 +17,11 @@ public class Phone {
         this.type = type;
     }
 
-    public Object getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Object number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

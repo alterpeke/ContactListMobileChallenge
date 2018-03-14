@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> image_titles = new ArrayList<>();
     ArrayList<String> image_url = new ArrayList<>();
     ArrayList<Contact> resultForAdapter = new ArrayList<>();
-
+    MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +44,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getDataUsingRetrofit() {
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
-        recyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
-        recyclerView.setLayoutManager(layoutManager);
+//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
+//        recyclerView.setHasFixedSize(true);
+//
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+//        recyclerView.setLayoutManager(layoutManager);
 
         loadJSON();
 //        ArrayList<CreateList> createLists = prepareData();
 //        MyAdapter adapter = new MyAdapter(getApplicationContext(), createLists);
 //        recyclerView.setAdapter(adapter);
-        //MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
-        //recyclerView.setAdapter(view);
+
     }
 
     private void loadJSON(){
@@ -77,11 +76,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (response.code()) {
                     case 200:
                         Log.i("REST SUCCESS", "Responce Code 200");
-                        List<Contact> data = response.body();
-                        //rrayList<Contact> data = (ArrayList<Contact>) response.body();
-                        //view.notifyDataSetChanged();
-                        //resultForAdapter = data;
+                        //List<Contact> data = response.body();
+                        ArrayList<Contact> data = (ArrayList<Contact>) response.body();
+//                        view.notifyDataSetChanged();
 
+                        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
+                        recyclerView.setHasFixedSize(true);
+
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                        recyclerView.setLayoutManager(layoutManager);
+                        resultForAdapter = data;
+                        MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
+                        recyclerView.setAdapter(view);
                         break;
                     case 401:
 

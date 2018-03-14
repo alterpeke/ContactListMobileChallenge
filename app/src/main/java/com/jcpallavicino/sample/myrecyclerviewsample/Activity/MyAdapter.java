@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.R;
 import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Contact;
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Result;
+import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Phone;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,12 +23,12 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Contact> list;
-    private ArrayList<CreateList> galleryList;
+    private ArrayList<Contact> galleryList;
     private Context context;
 
     public MyAdapter(Context context, ArrayList<Contact> galleryList) {
-//        this.galleryList = galleryList;
-//        this.context = context;
+        this.galleryList = galleryList;
+        this.context = context;
     }
 
     public void swap(List<Contact> newList) {
@@ -40,25 +40,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_layout, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MyAdapter.ViewHolder viewHolder, int i) {
 
-        Picasso.with(context)
-         .load(galleryList.get(i)
-         .getImage_ID())
-         .into(viewHolder.img);
+        Picasso.with(this.context)
+                .load(galleryList.get(i).getThumb())
+                .into(viewHolder.img);
 
-        viewHolder.title.setText(galleryList.get(i).getImage_title());
-        viewHolder.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,"Image Details", Toast.LENGTH_SHORT).show();
+        viewHolder.name.setText(galleryList.get(i).getLastName()+" "+galleryList.get(i).getFirstName());
+
+        List<Phone> fonos = galleryList.get(i).getPhones();
+
+        for (int j=0; j<fonos.size(); j++) {
+            if ((fonos.get(j).getType().contains("Home")) && !(fonos.get(j).getNumber()==null)) {
+                viewHolder.phone.setText(fonos.get(j).getNumber());
             }
-        });
+        }
+
     }
 
     @Override
@@ -67,13 +69,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView title;
+        private TextView name, phone;
         private ImageView img;
 
         public ViewHolder(View view) {
             super(view);
 
-            title = (TextView)view.findViewById(R.id.title);
+            name = (TextView) view.findViewById(R.id.album_name);
+            phone = (TextView) view.findViewById(R.id.artist_name);
             img = (ImageView) view.findViewById(R.id.img);
 
         }

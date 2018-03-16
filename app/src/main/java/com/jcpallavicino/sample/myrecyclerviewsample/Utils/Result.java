@@ -1,4 +1,4 @@
-package com.jcpallavicino.sample.myrecyclerviewsample.Utils;
+package com.jcpallavicino.sample.myrecyclerviewsample.utils;
 
 /**
  * Created by juan.pallavicino on 8/3/2018.

@@ -1,4 +1,4 @@
-package com.jcpallavicino.sample.myrecyclerviewsample.Activity;
+package com.jcpallavicino.sample.myrecyclerviewsample.activity;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jcpallavicino.sample.myrecyclerviewsample.R;
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Contact;
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Phone;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.Contact;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.OnItemClickListener;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.Phone;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,14 +21,19 @@ import java.util.List;
  * Created by juan.pallavicino on 26/9/2017.
  */
 
+
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Contact> list;
     private ArrayList<Contact> galleryList;
     private Context context;
+    private OnItemClickListener onClick;
+
 
     public MyAdapter(Context context, ArrayList<Contact> galleryList) {
         this.galleryList = galleryList;
         this.context = context;
+
     }
 
     public void swap(List<Contact> newList) {
@@ -45,10 +50,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final MyAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
 
         Picasso.with(this.context)
                 .load(galleryList.get(i).getThumb())
+                .fit()
                 .into(viewHolder.img);
 
         viewHolder.name.setText(galleryList.get(i).getLastName()+" "+galleryList.get(i).getFirstName());
@@ -57,11 +63,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         for (int j=0; j<fonos.size(); j++) {
             if ((fonos.get(j).getType().contains("Home")) && !(fonos.get(j).getNumber()==null)) {
-                viewHolder.phone.setText(fonos.get(j).getNumber());
+                viewHolder.phone.setText(fonos.get(j).getType() + " " + fonos.get(j).getNumber());
             }
         }
 
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(i);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -82,5 +96,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
 
+    }
+
+    public void setOnClick(OnItemClickListener onClick)
+    {
+        this.onClick=onClick;
     }
 }

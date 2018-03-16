@@ -1,10 +1,16 @@
-package com.jcpallavicino.sample.myrecyclerviewsample.Activity;
+package com.jcpallavicino.sample.myrecyclerviewsample.activity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -14,10 +20,10 @@ import com.jcpallavicino.sample.myrecyclerviewsample.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Contact;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.Contact;
 
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.RestClient;
-import com.jcpallavicino.sample.myrecyclerviewsample.Utils.Result;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.OnItemClickListener;
+import com.jcpallavicino.sample.myrecyclerviewsample.utils.RestClient;
 
 
 import retrofit2.Call;
@@ -28,32 +34,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> image_titles = new ArrayList<>();
-    ArrayList<String> image_url = new ArrayList<>();
     ArrayList<Contact> resultForAdapter = new ArrayList<>();
     MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter);
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         getDataUsingRetrofit();
+
 
 
     }
 
+
+
     public void getDataUsingRetrofit() {
-//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
-//        recyclerView.setHasFixedSize(true);
-//
-//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
-//        recyclerView.setLayoutManager(layoutManager);
 
         loadJSON();
-//        ArrayList<CreateList> createLists = prepareData();
-//        MyAdapter adapter = new MyAdapter(getApplicationContext(), createLists);
-//        recyclerView.setAdapter(adapter);
 
     }
 
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("REST SUCCESS", "Responce Code 200");
                         //List<Contact> data = response.body();
                         ArrayList<Contact> data = (ArrayList<Contact>) response.body();
-//                        view.notifyDataSetChanged();
 
                         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
                         recyclerView.setHasFixedSize(true);
@@ -87,7 +88,18 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.setLayoutManager(layoutManager);
                         resultForAdapter = data;
                         MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
+                            view.setOnClick(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Toast.makeText(MainActivity.this, "Item seleccionado: "+position, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getBaseContext(), ContactDetailActivity.class);
+                                    intent.putExtra("id", resultForAdapter.get(position).getUserId());
+                                    startActivity(intent);
+                                }
+                            });
+
                         recyclerView.setAdapter(view);
+                        spinner.setVisibility(View.GONE);
                         break;
                     case 401:
 
@@ -101,17 +113,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
                 Log.e("REST ERROR", t.toString());
+                Toast.makeText(MainActivity.this, "ERROR EN EL SERVICIO, INTENTE MAS TARDE", Toast.LENGTH_LONG).show();
             }
         });
     }
-
-//    @Override
-//    public void onFailure(Call<JSONResponse> call, Throwable t) {
-//        Log.d("Error",t.getMessage());
-//    }
-//    });
-//        }
-//    }
 
 
 }

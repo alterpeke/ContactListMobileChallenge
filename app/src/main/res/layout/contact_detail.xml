@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <!--HEADER DETAIL-->
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imagen_contacto"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombre_contacto"
+            android:textColor="@color/album_text_color"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="32dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/company_contacto"/>
+        <!--HEADER DETAIL-->
+
+        <!--HOME-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phone_home_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textColor="@color/listview_divider_color"
+                android:textSize="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/phone_home_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:textColor="@color/album_text_color" />
+
+                <TextView
+                    android:id="@+id/phone_home_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/listview_divider_color"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--HOME-->
+
+        <!--MOBILE-->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textSize="10dp"
+                android:textColor="@color/listview_divider_color"
+                android:id="@+id/phone_mobile_label"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/phone_mobile_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:textColor="@color/album_text_color"
+                    android:gravity="start" />
+
+                <TextView
+                    android:id="@+id/phone_mobile_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:gravity="end"
+                    android:textColor="@color/listview_divider_color"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--MOBILE-->
+
+        <!--WORK-->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textSize="10dp"
+                android:textColor="@color/listview_divider_color"
+                android:id="@+id/phone_work_label"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:layout_weight="1"
+                    android:textColor="@color/album_text_color"
+                    android:id="@+id/phone_work_data"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="end"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:textSize="10dp"
+                    android:textColor="@color/listview_divider_color"
+                    android:id="@+id/phone_work_legend"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--WORK-->
+
+        <!--ADDRESS-->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textSize="10dp"
+                android:textColor="@color/listview_divider_color"
+                android:id="@+id/address_label"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/album_text_color"
+                android:id="@+id/address"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/album_text_color"
+                android:id="@+id/city"/>
+
+        </LinearLayout>
+        <!--ADDRESS-->
+
+        <!--BIRTHDAY-->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textSize="10dp"
+                android:textColor="@color/listview_divider_color"
+                android:id="@+id/birthdate_label"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textColor="@color/album_text_color"
+                android:id="@+id/birthdate"/>
+
+        </LinearLayout>
+        <!--BIRTHDAY-->
+
+        <!--EMAIL-->
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:textSize="10dp"
+                android:textColor="@color/listview_divider_color"
+                android:id="@+id/email_label"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/album_text_color"
+                android:id="@+id/email"/>
+
+        </LinearLayout>
+        <!--EMAIL-->
+
+    </LinearLayout>
+    </ScrollView>
+</android.support.v7.widget.LinearLayoutCompat>

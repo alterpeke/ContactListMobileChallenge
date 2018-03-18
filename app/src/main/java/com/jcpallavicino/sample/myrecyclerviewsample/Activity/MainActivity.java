@@ -42,21 +42,50 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         spinner = (ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
-        getDataUsingRetrofit();
+        MyListener listener = new MyListener();
+        listener.setListener(new MyListener.MyInterfaceListener() {
+            @Override
+            public void onObjectReady(String title) {
 
+            }
+
+            @Override
+            public void onDataLoaded(ArrayList<Contact> data) {
+                getDataUsingRetrofit(data);
+            }
+        });
+
+        //getDataUsingRetrofit();
+        //spinner.setVisibility(View.GONE);
 
 
     }
 
+    public void getDataUsingRetrofit(ArrayList<Contact> data) {
 
+        //loadJSON();
 
-    public void getDataUsingRetrofit() {
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.imagegallery);
+        recyclerView.setHasFixedSize(true);
 
-        loadJSON();
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+        recyclerView.setLayoutManager(layoutManager);
+        resultForAdapter = data;
+        MyAdapter view = new MyAdapter(MainActivity.this, resultForAdapter );
+        view.setOnClick(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(MainActivity.this, "Item seleccionado: "+position, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getBaseContext(), ContactDetailActivity.class);
+                intent.putExtra("id", resultForAdapter.get(position).getUserId());
+                startActivity(intent);
+            }
+        });
 
+        recyclerView.setAdapter(view);
+        spinner.setVisibility(View.GONE);
     }
 
     private void loadJSON(){
